@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} &middot; Flask Blog{% endblock %}
+{% block content %}
+  <article class="post">
+    <a class="back-link" href="{{ url_for('index') }}">&larr; All posts</a>
+    <h1>{{ post.title }}</h1>
+    <div class="post-meta">{{ post.date.strftime('%b %d, %Y') if post.date.strftime else post.date }} &middot; {{ post.author }}</div>
+    {% if post.tags %}
+      <ul class="tag-list">
+        {% for tag in post.tags %}<li class="tag">{{ tag }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    <div class="post-body">
+      {{ post.html | safe }}
+    </div>
+  </article>
+{% endblock %}
